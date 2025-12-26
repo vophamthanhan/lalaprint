@@ -10,7 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  base: "/pos-invoice/", // Thay đổi thành tên repo của bạn trên GitHub
+  base: "/lalaprint/",
   build: {
     outDir: "dist",
     emptyOutDir: true,
