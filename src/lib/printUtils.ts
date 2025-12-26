@@ -74,6 +74,33 @@ function dashedLine(width: number = PAPER_WIDTH): string {
   return "-".repeat(width);
 }
 
+// Helper: Generate QR code ESC/POS command
+function generateQRCode(data: string): string {
+  const qrData = data;
+  const qrLength = qrData.length;
+  const pL = qrLength % 256;
+  const pH = Math.floor(qrLength / 256);
+  
+  let qrCommand = "";
+  
+  // Model (QR Code)
+  qrCommand += GS + "(k" + String.fromCharCode(4, 0, 49, 65, 50, 0);
+  
+  // Size of module (1-16, default 3)
+  qrCommand += GS + "(k" + String.fromCharCode(3, 0, 49, 67, 8);
+  
+  // Error correction level (48=L, 49=M, 50=Q, 51=H)
+  qrCommand += GS + "(k" + String.fromCharCode(3, 0, 49, 69, 49);
+  
+  // Store data
+  qrCommand += GS + "(k" + String.fromCharCode(pL + 3, pH, 49, 80, 48) + qrData;
+  
+  // Print QR code
+  qrCommand += GS + "(k" + String.fromCharCode(3, 0, 49, 81, 48);
+  
+  return qrCommand;
+}
+
 // Helper: Format two columns
 function twoColumns(left: string, right: string, width: number = PAPER_WIDTH): string {
   const rightLen = right.length;
@@ -163,6 +190,26 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   content += bank.accountName + "\n";
   content += COMMANDS.BOLD_OFF;
   content += bank.accountNumber + "\n";
+  content += bank.phone + "\n";
+  
+  // QR Code for payment
+  content += "\n";
+  const bankCodes: Record<string, string> = {
+    "VPBank": "970432",
+    "Vietcombank": "970436",
+    "Techcombank": "970407",
+    "BIDV": "970418",
+    "Agribank": "970405",
+    "MB Bank": "970422",
+    "ACB": "970416",
+    "Sacombank": "970403",
+    "VietinBank": "970415",
+    "TPBank": "970423",
+  };
+  const bankCode = bankCodes[bank.bankName] || "970432";
+  const qrContent = `2|99|${bank.accountNumber}|${bank.accountName}|${bank.bankName}|${total}|${info.invoiceNumber}|transfer`;
+  content += generateQRCode(qrContent);
+  content += "\n\n";
   
   // VAT note
   content += settings.vatNote + "\n";
