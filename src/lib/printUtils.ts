@@ -111,23 +111,23 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   // Invoice title
   content += COMMANDS.BOLD_ON;
   content += COMMANDS.DOUBLE_HEIGHT_ON;
-  content += "PHIẾU TẠM TÍNH\n";
+  content += "PHIEU TAM TINH\n";
   content += COMMANDS.NORMAL_SIZE;
   content += COMMANDS.BOLD_OFF;
-  content += "Số HĐ: " + info.invoiceNumber + "\n";
+  content += "So HD: " + info.invoiceNumber + "\n";
   
   // Invoice info
   content += COMMANDS.ALIGN_LEFT;
-  content += twoColumns("Mã HĐ: " + info.invoiceNumber, "TN: " + info.cashier) + "\n";
-  content += twoColumns("Bàn: " + info.table, "Ngày: " + info.date) + "\n";
-  content += twoColumns("Giờ vào: " + info.checkInTime, "Giờ ra: " + info.checkOutTime) + "\n";
+  content += twoColumns("Ma HD: " + info.invoiceNumber, "TN: " + info.cashier) + "\n";
+  content += twoColumns("Ban: " + info.table, "Ngay: " + info.date) + "\n";
+  content += twoColumns("Gio vao: " + info.checkInTime, "Gio ra: " + info.checkOutTime) + "\n";
   
   // Divider
   content += dashedLine() + "\n";
   
   // Table header
   content += COMMANDS.BOLD_ON;
-  const header = padString("STT", 4) + padString("Tên món", 20) + padString("SL", 4, "center") + padString("Đơn giá", 10, "right") + padString("T.Tiền", 10, "right");
+  const header = padString("STT", 4) + padString("Ten mon", 20) + padString("SL", 4, "center") + padString("Don gia", 10, "right") + padString("Tong", 10, "right");
   content += header + "\n";
   content += COMMANDS.BOLD_OFF;
   content += dashedLine() + "\n";
@@ -146,10 +146,10 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   content += dashedLine() + "\n";
   
   // Totals
-  content += twoColumns("Thành tiền:", formatCurrency(subtotal) + " đ") + "\n";
+  content += twoColumns("Thanh tien:", formatCurrency(subtotal)) + "\n";
   content += COMMANDS.BOLD_ON;
   content += COMMANDS.DOUBLE_HEIGHT_ON;
-  content += twoColumns("Tổng tiền:", formatCurrency(total) + " đ") + "\n";
+  content += twoColumns("Tong tien:", formatCurrency(total)) + "\n";
   content += COMMANDS.NORMAL_SIZE;
   content += COMMANDS.BOLD_OFF;
   
@@ -162,11 +162,7 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   content += COMMANDS.BOLD_ON;
   content += bank.accountName + "\n";
   content += COMMANDS.BOLD_OFF;
-  content += bank.phone + "\n";
-  
-  // Note: QR code would need to be printed as image
-  // For now, we'll add a placeholder
-  content += "\n[QR THANH TOÁN]\n\n";
+  content += bank.accountNumber + "\n";
   
   // VAT note
   content += settings.vatNote + "\n";
