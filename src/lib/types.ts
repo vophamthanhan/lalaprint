@@ -55,7 +55,7 @@ export const defaultSettings: AppSettings = {
     name: "LALA QUÁN",
     address: "02 Lê Thanh Nghị, Hải Châu, Đà Nẵng",
     phone: "0905886007",
-    logo: "",
+    logo: "/lalaprint/images/lala-logo.png",
   },
   bank: {
     bankName: "VPBank",
