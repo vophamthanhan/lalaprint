@@ -138,23 +138,23 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   // Invoice title
   content += COMMANDS.BOLD_ON;
   content += COMMANDS.DOUBLE_HEIGHT_ON;
-  content += "PHIEU TAM TINH\n";
+  content += "HOA DON THANH TOAN\n";
   content += COMMANDS.NORMAL_SIZE;
   content += COMMANDS.BOLD_OFF;
-  content += "So HD: " + info.invoiceNumber + "\n";
+  content += "Số HĐ: " + info.invoiceNumber + "\n";
   
   // Invoice info
   content += COMMANDS.ALIGN_LEFT;
-  content += twoColumns("Ma HD: " + info.invoiceNumber, "TN: " + info.cashier) + "\n";
-  content += twoColumns("Ban: " + info.table, "Ngay: " + info.date) + "\n";
-  content += twoColumns("Gio vao: " + info.checkInTime, "Gio ra: " + info.checkOutTime) + "\n";
+  content += twoColumns("Mã HĐ: " + info.invoiceNumber, "TN: " + info.cashier) + "\n";
+  content += twoColumns("Bàn: " + info.table, "Ngày: " + info.date) + "\n";
+  content += twoColumns("Giờ vào: " + info.checkInTime, "Giờ ra: " + info.checkOutTime) + "\n";
   
   // Divider
   content += dashedLine() + "\n";
   
   // Table header
   content += COMMANDS.BOLD_ON;
-  const header = padString("STT", 4) + padString("Ten mon", 20) + padString("SL", 4, "center") + padString("Don gia", 10, "right") + padString("Tong", 10, "right");
+  const header = padString("STT", 4) + padString("Tên món", 20) + padString("SL", 4, "center") + padString("Đơn giá", 10, "right") + padString("Tổng", 10, "right");
   content += header + "\n";
   content += COMMANDS.BOLD_OFF;
   content += dashedLine() + "\n";
@@ -173,10 +173,10 @@ export function generateESCPOS(invoice: Invoice, settings: AppSettings): string 
   content += dashedLine() + "\n";
   
   // Totals
-  content += twoColumns("Thanh tien:", formatCurrency(subtotal)) + "\n";
+  content += twoColumns("Thành tiền:", formatCurrency(subtotal)) + "\n";
   content += COMMANDS.BOLD_ON;
   content += COMMANDS.DOUBLE_HEIGHT_ON;
-  content += twoColumns("Tong tien:", formatCurrency(total)) + "\n";
+  content += twoColumns("Tổng tiền:", formatCurrency(total)) + "\n";
   content += COMMANDS.NORMAL_SIZE;
   content += COMMANDS.BOLD_OFF;
   
@@ -243,7 +243,7 @@ export function generatePlainText(invoice: Invoice, settings: AppSettings): stri
   content += dashedLine() + "\n";
   
   // Title
-  content += padString("PHIẾU TẠM TÍNH", PAPER_WIDTH, "center") + "\n";
+  content += padString("HÓA ĐƠN THANH TOÁN", PAPER_WIDTH, "center") + "\n";
   content += padString("Số HĐ: " + info.invoiceNumber, PAPER_WIDTH, "center") + "\n";
   content += "\n";
   
@@ -458,7 +458,7 @@ export function generatePrintHTML(invoice: Invoice, settings: AppSettings): stri
   <div class="divider"></div>
   
   <div class="center">
-    <div class="title">PHIẾU TẠM TÍNH</div>
+    <div class="title">HÓA ĐƠN THANH TOÁN</div>
     <div style="font-size: 10px;">Số HĐ: ${info.invoiceNumber}</div>
   </div>
   

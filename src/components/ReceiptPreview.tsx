@@ -65,7 +65,7 @@ export default function ReceiptPreview({ invoice, settings, showQR = true }: Rec
 
       {/* Invoice Title */}
       <div className="text-center mb-2">
-        <div className="font-bold text-base tracking-wide">PHIẾU TẠM TÍNH</div>
+        <div className="font-bold text-base tracking-wide">HÓA ĐƠN THANH TOÁN</div>
         <div className="text-[10px] text-gray-500">Số HĐ:</div>
       </div>
 
